@@ -18,13 +18,13 @@ public final class NICInfos {
 			
 			while ( nics.hasMoreElements() ){
 				NetworkInterface nic = nics.nextElement();
-				System.out.println(nic.getDisplayName());
+			//	System.out.println(nic.getDisplayName());
 				
 				Enumeration<InetAddress> adrs = nic.getInetAddresses();
 				
 				while(adrs.hasMoreElements()){
 					String ip = adrs.nextElement().getHostAddress();
-					System.out.println(ip);
+			//		System.out.println(ip);
 					ips.add(ip);
 				}
 			}

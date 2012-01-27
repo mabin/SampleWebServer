@@ -43,10 +43,10 @@ public class ConfigurationUtil {
 			// Element代表XML中的一个标签对，可用于获取属性值
 			Element element = doc.getDocumentElement();
 			// 获取该Element的标签名
-			System.out.println("Root Element : " + element.getTagName());
+		//	System.out.println("Root Element : " + element.getTagName());
 			// 通过标签名来获取多个节点
 			NodeList nodeList = doc.getElementsByTagName("Service");
-			System.out.println("NodeList Length : " + nodeList.getLength());
+		//	System.out.println("NodeList Length : " + nodeList.getLength());
 
 			Node node = nodeList.item(0);
 			System.out.println("First Node : " + node.getNodeName());
@@ -67,8 +67,8 @@ public class ConfigurationUtil {
 				// 当子节点是一个Element时才能获取该元素的标签名和属性值
 				if (child instanceof Element) {
 					System.out.println(i);
-					System.out.println(child.getNodeName() + " : "
-							+ child.getFirstChild().getNodeValue());
+			//		System.out.println(child.getNodeName() + " : "
+			//				+ child.getFirstChild().getNodeValue());
 					valueMap.put(child.getNodeName(), child.getFirstChild()
 							.getNodeValue());
 				}
