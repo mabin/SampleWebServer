@@ -1,10 +1,8 @@
 package org.sws.utils;
 
-import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.util.Scanner;
 
 public class ResponseUtil {
 	String type ;
@@ -22,23 +20,24 @@ public class ResponseUtil {
 	}
 	
 	public String getPage(){
+		FileInputStream fis ;
+		StringBuilder sb = new StringBuilder();;
+		Scanner scan = null ;
+		
 		try {
-			FileInputStream fis = new FileInputStream(absPath+this.path);
-			BufferedReader buffer = new BufferedReader(
-					new InputStreamReader(fis));
-			StringBuilder sb = new StringBuilder();
-			String line="";
-			while ( (line=buffer.readLine()) != null){
-				sb.append(line);
+			fis = new FileInputStream(absPath+this.path);
+			scan = new Scanner(fis);
+			sb.append("HTTP/1.1 200 OK\r\n");
+			sb.append("Content-Type:text/html\r\n\r\n");
+			while ( scan.hasNextLine()){
+				sb.append(scan.nextLine());
 			}
 			System.out.println(sb.toString());
-		} catch (FileNotFoundException e) {
+			}
+		catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return null ;
+		} 
+		return sb.toString() ;
 	}
 }

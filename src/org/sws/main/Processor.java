@@ -3,6 +3,7 @@ package org.sws.main;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
 
@@ -27,6 +28,10 @@ public class Processor {
 			clientSocket = serverSocket.accept();
 			input = clientSocket.getInputStream();
 			request = new RequestUtil(input);
+			String str = request.requestCode();
+			PrintWriter writer = new PrintWriter(clientSocket.getOutputStream());
+			writer.write(str);
+			writer.flush();
 			clientSocket.close();
 			serverSocket.close();
 			System.out.println("end all");

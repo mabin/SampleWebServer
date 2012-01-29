@@ -1,9 +1,7 @@
 package org.sws.utils;
 
-import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -14,11 +12,11 @@ public class RequestUtil {
 
 	public RequestUtil(InputStream input){
 		this.input = input ;
-		requestCode();
+		//requestCode();
 	}
 
 	public String requestCode(){
-
+		String pageContent = "";
 		try {
 			byte[] buffer = new byte[2048];
 			input.read(buffer);
@@ -56,13 +54,13 @@ public class RequestUtil {
 					requestMap.get("requestType"),
 					requestMap.get("requestPath"),
 					requestMap.get("requestProtocol"));
-			rep.getPage();
+			pageContent = rep.getPage();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} 
 		
 		
-		return null ;
+		return pageContent ;
 	}
 }
