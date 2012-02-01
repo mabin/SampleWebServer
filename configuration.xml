@@ -1,16 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
 <Server>
-	<Service name="SampleWebServer">
-    	<Listen>8080</Listen>
-   		<Protocol>HTTP/1.1</Protocol> 
-		<Host>localhost</Host>
-    	<Root>/html</Root>
-    </Service>
-    
-    <Service name="SampleWebServer1">
-    	<Listen>8081</Listen>
-   		<Protocol>HTTP/1.1</Protocol> 
-		<Host>localhost</Host>
-    	<Root>/html</Root>
-    </Service>
+	<Host name="SampleWebServer" port="8080" address="localhost" path="html"/>
+    <Host name="MultiWebServer" port="8081" address="127.0.0.1" path="html1"/>
 </Server>

@@ -4,7 +4,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 
-public class ResponseUtil {
+public class ResponseUtil extends ABSUtils{
 	String type ;
 	String path ;
 	String Protocol ;

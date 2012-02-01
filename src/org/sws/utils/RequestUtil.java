@@ -2,20 +2,22 @@ package org.sws.utils;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.nio.ByteBuffer;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Map.Entry;
 
-public class RequestUtil {
-	private InputStream input ;
+public class RequestUtil extends ABSUtils {
+	public static InputStream input ;
 
+	public RequestUtil(){}
 	public RequestUtil(InputStream input){
 		this.input = input ;
 		//requestCode();
 	}
 
-	public String requestCode(){
+	public String requestCode(ByteBuffer requestBuffer){
 		String pageContent = "";
 		try {
 			byte[] buffer = new byte[2048];
