@@ -17,7 +17,7 @@ import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
 
-public  class ConfigurationUtil extends ABSUtils{
+public  class ConfigurationUtil implements Utils{
 
 	public  Document document = null;
 	public  Set<HashMap<String,String>> configSet = new HashSet<HashMap<String,String>>();
@@ -57,9 +57,12 @@ public  class ConfigurationUtil extends ABSUtils{
 			e.printStackTrace();
 		}
 		
-		
-		
-		
 		return configSet;
+	}
+
+	@Override
+	public void utilInfo() {
+		// TODO Auto-generated method stub
+		
 	}
 }

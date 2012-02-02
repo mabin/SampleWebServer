@@ -9,7 +9,7 @@ public class TestFactory {
 	@Test
 	public void test() {
 		UtilsFactory u = new UtilsFactory();
-		u.newInstance("org.sws.utils.RequestUtil");
+		//u.newInstance("org.sws.utils.RequestUtil");
 		//RequestUtil util = (RequestUtil)UtilsFactory.newInstance("RequestUtil");
 	}
 

@@ -1,5 +1,6 @@
 package org.sws.main;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.InetSocketAddress;
 import java.nio.ByteBuffer;
@@ -7,6 +8,8 @@ import java.nio.channels.SelectionKey;
 import java.nio.channels.Selector;
 import java.nio.channels.ServerSocketChannel;
 import java.nio.channels.SocketChannel;
+import java.nio.charset.Charset;
+import java.nio.charset.CharsetDecoder;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Set;
@@ -23,7 +26,6 @@ public class Handler {
 	public Set<HashMap<String,String>> configSet;
 	public Iterator<HashMap<String,String>> configIter;
 	public HashMap<String,String> configMap ;
-	public ByteBuffer httpBuffer = ByteBuffer.allocate(2048);
 	
 	public Handler(Set<HashMap<String,String>> configSet){
 		this.configSet = configSet;
@@ -46,7 +48,10 @@ public class Handler {
 				SelectionKey selectionKey = serverChannel.register(selector, SelectionKey.OP_ACCEPT);
 				System.out.println("开始启动"+configMap.get("name")+"服务器,监听的端口是"+configMap.get("port"));
 				portMap.put(Integer.parseInt(configMap.get("port")), configMap.get("path"));
+				System.out.println("port --> "+configMap.get("port"));
+				System.out.println("path --> "+configMap.get("path"));
 			}
+
 			boolean status = true;
 			while (status){
 				int num = selector.select();//选择了多少个请求
@@ -73,13 +78,23 @@ public class Handler {
 					else if ( (selectedKey.readyOps()&SelectionKey.OP_READ) == SelectionKey.OP_READ){
 						SocketChannel socketChannel = (SocketChannel)selectedKey.channel();
 						//通过通道端口号获取对应文档路径
-						String filePath = portMap.get(socketChannel.socket().getPort());
-						
+
+						String filePath = portMap.get(socketChannel.socket().getLocalPort());
+						ByteBuffer httpBuffer = ByteBuffer.allocate(2048);
 						httpBuffer.clear();
 						int i = socketChannel.read(httpBuffer);
 						if (i >= 0){
-							Utils requestUtil = UtilsFactory.newInstance("org.sws.utils.RequestUtils");
+							RequestUtil requestUtil = UtilsFactory.getRequestUtil();
 							
+							String request = requestUtil.requestCode(httpBuffer,File.separator+filePath);
+							
+							ByteBuffer responseBuffer = Charset.forName("gb2312").encode(request);
+							
+							socketChannel.write(responseBuffer);
+							socketChannel.close();
+							httpBuffer.clear();
+							responseBuffer.clear();
+							//System.out.println("buffer clear after "+new String(httpBuffer.array()));
 						}
 					}
 					//如果以选择通道为写入数据请求

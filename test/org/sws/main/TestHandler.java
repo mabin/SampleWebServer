@@ -13,7 +13,7 @@ public class TestHandler {
 
 	@Test
 	public void test() {
-		Utils configUtil = UtilsFactory.newInstance("org.sws.utils.ConfigurationUtil");
+		ConfigurationUtil configUtil = UtilsFactory.getConfigUtil();
 		Set<HashMap<String, String>> configSet = configUtil.getConfigs("configuration.xml");
 
 		Iterator<HashMap<String, String>> configIter = configSet.iterator();

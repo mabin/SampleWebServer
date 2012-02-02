@@ -1,33 +1,52 @@
 package org.sws.utils;
 
 public class UtilsFactory {
-	public static Utils newInstance(String className){
-		Object obj = null ;
+	public static Object obj = null ;
+
+	public static ConfigurationUtil getConfigUtil(){
 		try {
-			obj = Class.forName(className).newInstance();
-			//System.out.print(obj.getClass().getName());
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			obj = Class.forName("org.sws.utils.ConfigurationUtil").newInstance();
 		} catch (InstantiationException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (IllegalAccessException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
-		if (obj.getClass().getName().equals("org.sws.utils.ConfigurationUtil")){
-			return (ConfigurationUtil)obj;
+		return (ConfigurationUtil)obj;
+	}
+	
+	public static RequestUtil getRequestUtil(){
+		try {
+			obj = Class.forName("org.sws.utils.RequestUtil").newInstance();
+		} catch (InstantiationException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IllegalAccessException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
-		else if (obj.getClass().getName().equals("org.sws.utils.RequestUtil")){
-			return (RequestUtil)obj;
+		return (RequestUtil)obj;
+	}
+	public static ResponseUtil getResponseUtil(){
+		try {
+			obj = Class.forName("org.sws.utils.ResponseUtil").newInstance();
+		} catch (InstantiationException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IllegalAccessException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
-		else if (obj.getClass().getName().equals("org.sws.utils.ResponseUtil")){
-			return (ResponseUtil)obj;
-		}
-		else
-		{
-			return null;
-		}
+		return (ResponseUtil)obj;
 	}
 }

@@ -18,8 +18,8 @@ public class Server {
 	private Set<HashMap<String,String>> configSet;
 	
 	public Server(){
-		Utils configUtil = UtilsFactory.newInstance("org.sws.utils.ConfigurationUtil");
-		configSet =configUtil.getConfigs("configuration.xml");
+		ConfigurationUtil configUtil = UtilsFactory.getConfigUtil();
+		configSet = configUtil.getConfigs("configuration.xml");
 		initServer(configSet);
 	}
 	
